@@ -38,6 +38,19 @@ export const BreakingbadApp = async( element ) => {
         element.replaceChildren( quoteLabel, authorLabel, nexQuoteButton );
     }
 
+    //Tarea: add event listener al botón y mostrar un quote diferente
+    nexQuoteButton.addEventListener('click', async() => {
+
+        element.innerHTML = 'Loading...';
+        //Mi respuesta:
+        //  fetchQuote()
+        //     .then( renderQuote);
+        //Es correcto, pues funciona. Pero queda más correcto lo que indica Fernando para otros programadores
+        const quote = await fetchQuote();
+        renderQuote( quote );
+
+    })
+
     fetchQuote()
         .then( renderQuote );// .then( (data) => renderQuote(data) ). Como el argumento que mandamos('data') es el mismo que pedimos también en el 
         //RenderQuote, se puede simplificar de esta manera
