@@ -1,4 +1,5 @@
 //!Creación y actualización de datos en la tabla
+import { localhostUserToModel } from '../mappers/localhost-user.mapper';
 import { userModelToLocalhost } from '../mappers/user-to-localhost.mapper';
 import {User} from '../models/user';
 
@@ -17,14 +18,16 @@ export const saveUser = async( userLike ) => {
         throw 'First & last name required';
     
     const userToSave = userModelToLocalhost( user );
+    let userUpdated;
 
     if ( user.id ) {
-        throw 'No implementada la actualización'
-        return;
-    } 
+        userUpdated = await updateUser( userToSave );
+    } else {
+        userUpdated = await createUser( userToSave );
+    }
 
-    const updatedUser = await createUser( userToSave );
-    return updatedUser;
+    return localhostUserToModel( userUpdated );
+  
 }
 
 //Usuario que tenemos que mandar al backend
@@ -46,4 +49,24 @@ const createUser = async( user ) => {
     const newUser = await res.json();
     console.log({newUser});
     return newUser;
+}
+
+//Actualización de un usuario en el backend
+/**
+ * @param {Like<User>} user
+ */
+const updateUser = async( user ) => {
+
+    const url = `${ import.meta.env.VITE_BASE_URL }/users/${ user.id }`;
+    const res = await fetch(url, {
+        method: 'PATCH', //update solo lo que hemos pedido en el backend
+        body: JSON.stringify(user),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const updatedUser = await res.json();
+    console.log({updatedUser});
+    return updatedUser;
 }

@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "isActive": false,
+      "isActive": true,
       "balance": 1397.32,
       "avatar": "http://placehold.it/32x32",
       "first_name": "Ryan",
@@ -20,7 +20,7 @@
     },
     {
       "id": 3,
-      "isActive": true,
+      "isActive": false,
       "balance": 2010.88,
       "avatar": "http://placehold.it/32x32",
       "first_name": "Lee",
