@@ -14,6 +14,8 @@ export const showModal = () => {
 
 export const hideModal = () => {
     modal?.classList.add('hide-modal');//Si existe el modal, añade el hide-modal
+    //Reset del formulario:
+    form?.reset();//Si hay un formulario, resetea los valores. 
 }
 
 /**
@@ -39,7 +41,27 @@ export const renderModal = ( element ) => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        console.log('Formulario enviado');
+        const formData = new FormData( form );
+        const userLike = {};
+
+        for (const [key, value] of formData) {
+            if ( key === 'balance' ){
+                userLike[key] = +value;//Estamos indicando que, si el key es el balance, 
+                //entonces el valor va a ser numérico, y no un string
+                continue; //"continúa con el resto del for"
+            }
+
+            if ( key === 'isActive' ) {
+                userLike[key] = (value === 'on') ? true : false;
+                //Si el valor de isActive es on, entonces conviértelo en un 
+                //Valor buleano de true. Si es off, es false
+                continue;
+            }
+
+            userLike[key] = value;
+        }
+
+        hideModal();
     });
 
     element.append( modal );
