@@ -46,10 +46,15 @@ const onUserChanged = ( updatedUser ) => {
     }
 }
 
-
-const reloadPage = () => {
-    throw new Error('Not implemented');
-}
+//Cargar la página para que, aunque eliminemos un elemento, que siempre hayan 10
+const reloadPage = async() => {
+    const users = await loadUsersByPage( state.currentPage );
+    if ( users.length === 0 ) {
+        await loadPreviousPage();
+        return;
+    };
+    state.users = users;
+} 
 
 export default {
     loadNextPage,

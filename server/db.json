@@ -20,7 +20,7 @@
     },
     {
       "id": 3,
-      "isActive": false,
+      "isActive": true,
       "balance": 2010.88,
       "avatar": "http://placehold.it/32x32",
       "first_name": "Lee",
@@ -449,13 +449,6 @@
       "first_name": "Mcbride",
       "last_name": "Woodward",
       "gender": "male"
-    },
-    {
-      "balance": 1500,
-      "first_name": "Lilla",
-      "isActive": true,
-      "last_name": "Doughty",
-      "id": 51
     }
   ]
 }
