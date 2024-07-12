@@ -22,7 +22,7 @@ export const saveUser = async( userLike ) => {
     return updatedUser;
 }
 
-//!Usuario que tenemos que mandar al backend
+//Usuario que tenemos que mandar al backend
 /**
  * @param {Like<User>} user
  */
